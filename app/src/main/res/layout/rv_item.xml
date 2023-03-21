@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="@color/black_shade_2"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="4dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/noteTitle"
+            android:layout_margin="4dp"
+            android:text="Note Title"
+            android:layout_toLeftOf="@id/rvDelete"
+            android:textSize="18sp"
+            android:textColor="@color/white"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/timeStamp"
+            android:layout_below="@id/noteTitle"
+            android:layout_margin="4dp"
+            android:text="Time Stamp"
+            android:layout_toLeftOf="@id/rvDelete"
+            android:padding="4dp"
+            android:textColor="@color/white"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rvDelete"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_delete"
+            android:layout_centerVertical="true"
+            android:padding="4dp"
+            app:tint="@color/white"
+            android:layout_margin="5dp"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
