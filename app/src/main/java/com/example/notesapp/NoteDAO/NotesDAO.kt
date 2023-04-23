@@ -1,13 +1,13 @@
-package com.example.notesapp
+package com.example.notesapp.NoteDAO
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.notesapp.model.Note
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NotesDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(note:Note)
+    suspend fun insert(note: Note)
 
     @Update
     suspend fun update(note: Note)

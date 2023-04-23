@@ -2,26 +2,33 @@ package com.example.notesapp
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.notesapp.model.Note
+import com.example.notesapp.databinding.RvItemBinding
 
 class note_adapter(val context:Context,val getClicked: GetClicked,val getDelete: GetDelete):RecyclerView.Adapter<note_adapter.ViewHolder>() {
      var notes= emptyList<Note>()
-    lateinit var currentNote:Note
-    class ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){}
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int)=ViewHolder(LayoutInflater.from(p0.context).inflate(R.layout.rv_item,p0,false))
+    lateinit var currentNote: Note
+    private lateinit var binding:RvItemBinding
+    class ViewHolder(private  val binding:RvItemBinding,private val getDelete: GetDelete):RecyclerView.ViewHolder(binding.root){
+        fun bind(note: Note){
+            binding.note=note
+        }
+    }
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
+        binding=RvItemBinding.inflate(LayoutInflater.from(p0.context),p0,false)
+        return ViewHolder(binding,getDelete)
+    }
     override fun getItemCount()=notes.size
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
         currentNote=notes[p1]
-        p0.itemView.findViewById<TextView>(R.id.noteTitle).text=currentNote.noteTitle
-        p0.itemView.findViewById<TextView>(R.id.timeStamp).text="Last update ${currentNote.timeStamp}"
-        p0.itemView.findViewById<ImageView>(R.id.rvDelete).setOnClickListener {
+        p0.bind(currentNote)
+        binding.rvDelete.setOnClickListener{
             getDelete.onDeleteIconClicked(currentNote)
         }
-        p0.itemView.setOnClickListener {
+        binding.root.setOnClickListener{
             getClicked.onNoteClicked(currentNote)
         }
     }
@@ -31,8 +38,8 @@ class note_adapter(val context:Context,val getClicked: GetClicked,val getDelete:
     }
 }
 interface GetDelete{
-    fun onDeleteIconClicked(note:Note)
+    fun onDeleteIconClicked(note: Note)
 }
 interface  GetClicked{
-    fun onNoteClicked(note:Note)
+    fun onNoteClicked(note: Note)
 }
